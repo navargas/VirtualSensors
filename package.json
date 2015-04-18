@@ -1,0 +1,18 @@
+{
+  "name": "virtualsensor",
+  "version": "1.0.0",
+  "description": "Platform for the virtualization of IoT enabled devices",
+  "main": "app.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.rtp.raleigh.ibm.com/karank-us/tleit.git"
+  },
+  "keywords": [
+    "iot"
+  ],
+  "author": "Nicholas Vargas",
+  "license": "ISC"
+}
