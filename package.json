@@ -14,5 +14,9 @@
     "iot"
   ],
   "author": "Nicholas Vargas",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "hat": "0.0.3"
+  }
 }
