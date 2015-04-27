@@ -1,8 +1,8 @@
 var express = require('express');
 var sessions = require('./lib/sessions.js');
 var bodyParser = require('body-parser');
-
-
+var iot = require('./lib/iot.js');
+iot.init();
 var V1 = './routes/v1/';
 
 // defensiveness against errors parsing request bodies...
@@ -11,6 +11,7 @@ process.on('uncaughtException', function (err) {
 });
 
 var app = express();
+
 
 app.get('/', function(req, res) {
   res.end("ok");
