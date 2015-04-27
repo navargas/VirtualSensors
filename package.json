@@ -18,6 +18,7 @@
   "dependencies": {
     "bcrypt": "^0.8.2",
     "body-parser": "^1.12.3",
-    "hat": "0.0.3"
+    "hat": "0.0.3",
+    "iotclient": "^0.1.5"
   }
 }
