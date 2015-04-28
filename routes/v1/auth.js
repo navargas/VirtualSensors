@@ -13,10 +13,6 @@ router.get('/log', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-  if (req.headers['content-type'].indexOf('json') < 0) {
-    res.end('Content type must be application/json');
-    return;
-  }
   if (req.body.username && req.body.password) {
     sessions.authenticate(req.body.username, req.body.password, function(err, token) {
       if (err) {

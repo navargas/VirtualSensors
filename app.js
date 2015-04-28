@@ -23,6 +23,7 @@ app.set('views', __dirname + '/views');
 //});
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use('/api/v1/sensors', require(V1 + 'sensors.js'));
 app.use('/api/v1/auth',    require(V1 + 'auth.js'));
 app.use('/', require('./routes/ui.js'));
