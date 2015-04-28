@@ -23,6 +23,7 @@ router.post('/login', function(req, res) {
         res.send({"error":err});
         res.end();
       } else {
+        res.cookie('token',token, { maxAge: 900000 });
         res.send({"token":token});
         res.end();
       }
@@ -31,6 +32,12 @@ router.post('/login', function(req, res) {
     res.send({"error":"Username or password not provided. Post JSON data"});
     res.end();
   }
+});
+
+router.get('/org', sessions.verify, function(req, res) {
+  var info = sessions.getOrg(req);
+  res.send(info);
+  res.end();
 });
 
 router.post('/users', function(req, res) {

@@ -1,6 +1,8 @@
 var express = require('express');
 var sessions = require('./lib/sessions.js');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var mustacheExpress = require('mustache-express');
 var iot = require('./lib/iot.js');
 iot.init();
 var V1 = './routes/v1/';
@@ -11,7 +13,10 @@ process.on('uncaughtException', function (err) {
 });
 
 var app = express();
-
+app.use(cookieParser());
+app.engine('mustache', mustacheExpress());
+app.set('view engine', 'mustache');
+app.set('views', __dirname + '/views');
 
 app.get('/', function(req, res) {
   res.end("ok");
@@ -20,5 +25,6 @@ app.get('/', function(req, res) {
 app.use(bodyParser.json());
 app.use('/api/v1/sensors', require(V1 + 'sensors.js'));
 app.use('/api/v1/auth',    require(V1 + 'auth.js'));
+app.use('/dash', require('./routes/ui.js'));
 
 app.listen(process.env.VCAP_APP_PORT || 80);
