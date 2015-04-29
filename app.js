@@ -27,5 +27,6 @@ app.use(bodyParser.urlencoded());
 app.use('/api/v1/sensors', require(V1 + 'sensors.js'));
 app.use('/api/v1/auth',    require(V1 + 'auth.js'));
 app.use('/', require('./routes/ui.js'));
+app.use('/public', express.static(__dirname + '/public'));
 
 app.listen(process.env.VCAP_APP_PORT || 80);

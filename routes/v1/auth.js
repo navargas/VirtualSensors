@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  res.end('POST {username:..., password:..} to /v1/auth/session');
+  res.end('POST to /api/v1/auth/login');
 });
 
 router.get('/log', function(req, res) {
@@ -20,8 +20,13 @@ router.post('/login', function(req, res) {
         res.end();
       } else {
         res.cookie('token',token, { maxAge: 900000 });
-        res.send({"token":token});
-        res.end();
+        if (req.query.redirect == 'yes') {
+          res.redirect('/');
+          res.end();
+        } else {
+          res.send({"token":token});
+          res.end();
+        }
       }
     });
   } else {
