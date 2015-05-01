@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var handlebarsExpress = require('express-handlebars');
 var iot = require('./lib/iot.js');
-iot.init();
+//iot.init();
 var V1 = './routes/v1/';
 
 // defensiveness against errors parsing request bodies...
@@ -23,7 +23,7 @@ app.set('views', __dirname + '/views');
 //});
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use('/api/v1/sensors', require(V1 + 'sensors.js'));
 app.use('/api/v1/auth',    require(V1 + 'auth.js'));
 app.use('/', require('./routes/ui.js'));
