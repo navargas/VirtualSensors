@@ -2,4 +2,4 @@ npm-debug.log
 config.json
 *.swp
 node_modules/*
-Session.vim
+*.vim
