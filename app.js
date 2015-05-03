@@ -18,10 +18,6 @@ app.engine('hbs', handlebarsExpress());
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
-//app.get('/', function(req, res) {
-//  res.end("ok");
-//});
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/api/v1/sensors', require(V1 + 'sensors.js'));
