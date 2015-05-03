@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var handlebarsExpress = require('express-handlebars');
 var iot = require('./lib/iot.js');
-//iot.init();
+iot.init();
 var V1 = './routes/v1/';
 
 // defensiveness against errors parsing request bodies...
