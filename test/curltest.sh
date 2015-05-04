@@ -1,5 +1,13 @@
 #!/bin/bash
 
+jq &>/dev/null
+if [ $? -eq 127 ]; then
+  echo "jq executable not found."
+  echo "check yum, apt, or download directly from"
+  echo "http://stedolan.github.io/jq/download/"
+  exit 1;
+fi
+
 #COLORS
 black='\E[30m'
 red='\E[31m'
@@ -22,6 +30,8 @@ BWhite='\e[1;37m'       # White
 #CHARACTERS
 check='\xE2\x9C\x93'
 cross='\xE2\x9C\x97'
+
+fails=0
 
 #http://www.tldp.org/LDP/abs/html/colorizing.html
 cecho ()                     # Color-echo.
@@ -54,7 +64,7 @@ utest () {
     cecho "    $check OK" $green
   else
     cecho "    $cross FAIL" $red
-    exit 1;
+    fails=$(( $fails + 1 ))
   fi
   return
 }
@@ -106,6 +116,12 @@ result=$(./delete_device.sh $token 2>/dev/null)
 info "$result"
 checkstatus "$result"; utest
 
-cecho "$check Zero failures" $green
+if [ $fails -eq 0 ]; then
+  cecho "$check Zero failures" $green
+elif [ $fails -eq 1 ]; then
+  cecho "$cross One failure" $red
+else
+  cecho "$cross $fails failures" $red
+fi
 echo
 
