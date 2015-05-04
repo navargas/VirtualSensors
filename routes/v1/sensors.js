@@ -10,19 +10,19 @@ router.get('/', sessions.verify, function(req, res) {
 });
 
 router.post('/', sessions.verify, function(req, res) {
-  console.log("Adding device:", req.body);
   if (!req.body.device) {
     res.send({"error":"Missing or invalid device"});
   }
   var info = sessions.addDevice(req, req.body.device);
+  info.status = 'ok';
   res.send(info);
   res.end();
 });
 
 router.delete('/:sensor', sessions.verify, function(req, res) {
   //get sensor info
-  var uid = req.params.sensor;
-  var info = sessions.removeDevice(req, uid);
+  var devName = req.params.sensor;
+  var info = sessions.removeDevice(req, devName);
   res.send(info);
   res.end();
 });
