@@ -48,7 +48,7 @@ router.post('/users', function(req, res) {
         res.send({"error":err});
         res.end();
       } else {
-        res.send({"username":req.body.username, "status":"success"});
+        res.send({"username":req.body.username, "status":"ok"});
         res.end();
       }
     });

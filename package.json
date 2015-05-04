@@ -4,7 +4,7 @@
   "description": "Platform for the virtualization of IoT enabled devices",
   "main": "app.js",
   "scripts": {
-    "test": "test.js"
+    "test": "cd test/ && bash ./curltest.sh"
   },
   "repository": {
     "type": "git",

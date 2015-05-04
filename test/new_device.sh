@@ -5,7 +5,7 @@ curl "$target"api/v1/sensors -k -X POST -d \
       "token" :"'$1'",
       "device": {
          "unit":"temperature",
-         "name":"'$2'",
+         "name": "testdevice01",
          "min" : 34,
          "max" : 53,
          "interval":2
