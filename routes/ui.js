@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
     var data = {"cards":[{"name":"temp1", "value":23},
                          {"name":"temp2", "value":42},
                          {"name":"Power Usage", "value":82}]};
+    data.layout = 'blank';
     res.render('index', data);
   } else {
     res.render('login');

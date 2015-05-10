@@ -3,9 +3,13 @@ var sessions = require('./lib/sessions.js');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var handlebarsExpress = require('express-handlebars');
+var partials = require('express-partials');
 var iot = require('./lib/iot.js');
-iot.init();
+var conf = require('./lib/loadConfig.js');
 var V1 = './routes/v1/';
+
+iot.init();
+conf.read('config.json');
 
 // defensiveness against errors parsing request bodies...
 process.on('uncaughtException', function (err) {
@@ -13,7 +17,9 @@ process.on('uncaughtException', function (err) {
 });
 
 var app = express();
+partials.register('.hbs', handlebarsExpress);
 app.use(cookieParser());
+app.use(partials());
 app.engine('hbs', handlebarsExpress());
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');

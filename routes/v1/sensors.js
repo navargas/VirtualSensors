@@ -1,5 +1,6 @@
 var express = require('express');
 var sessions = require('../../lib/sessions.js');
+var env = require('../../lib/loadConfig.js').values;
 var router = express.Router();
 
 router.get('/', sessions.verify, function(req, res) {
