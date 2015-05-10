@@ -85,8 +85,8 @@ checkstatus () {
   return $?;
 }
 
-echo
-cecho "Starting tests" $BGreen
+devicename="testingdevice1"
+cecho "Starting tests" $green
 
 title "Create user"
 user=$(./create_user.sh 2>/dev/null)
@@ -100,19 +100,19 @@ token=$(echo $login | jq -r '.token' | sed 's/\r//')
 [[ $token != "null" ]]; utest
 
 title "Create device"
-device=$(./new_device.sh $token 2>/dev/null)
+device=$(./new_device.sh $token $devicename 2>/dev/null)
 info "$device"
 checkstatus "$device"; utest
 
 title "Check for device"
 result=$(./get_devices.sh $token 2>/dev/null)
-device=$(getproperty $result "testdevice01")
+device=$(getproperty $result "$devicename")
 short=$(echo $device | cut -c1-71)...
 info "$short"
 notnull $device ; utest
 
 title "Delete device"
-result=$(./delete_device.sh $token 2>/dev/null)
+result=$(./delete_device.sh $token $devicename 2>/dev/null)
 info "$result"
 checkstatus "$result"; utest
 
@@ -123,5 +123,4 @@ elif [ $fails -eq 1 ]; then
 else
   cecho "$cross $fails failures" $red
 fi
-echo
 
