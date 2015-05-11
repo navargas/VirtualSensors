@@ -1,18 +1,39 @@
-
 var express = require('express');
 var sessions = require('../lib/sessions.js');
+var nav = require('../lib/nav.js');
+var env = require('../lib/loadConfig.js').read('config.json');
+var OAuth2 = require('googleapis').auth.OAuth2;
+var oauth2Client = new OAuth2(env.CLIENT_ID, env.CLIENT_SECRET, env.REDIRECT_URL);
 var router = express.Router();
 var debug = true;
 
 router.get('/', function(req, res) {
-  if (sessions.isValidSession(req) || debug) {
-    var data = {"cards":[{"name":"temp1", "value":23},
-                         {"name":"temp2", "value":42},
-                         {"name":"Power Usage", "value":82}]};
+  if (sessions.isValidSession(req)) {
+    var user = sessions.getUser(req);
+    var devices = sessions.getDevices(req);
+    devices = nav.demap(devices).values;
+    console.log('GET: devices', devices);
+    var data = {"cards":devices};
     data.layout = 'blank';
+    data.username = user.username;
+    if (user.google && user.google.displayName) {
+      data.username = user.google.displayName;
+    }
     res.render('index', data);
   } else {
-    res.render('login');
+    var url = oauth2Client.generateAuthUrl({"scope":"email", "response_type":"code"});
+    res.render('login', {"layout":"blank","oauthurl":url});
+  }
+});
+
+router.get('/cards', function(req, res) {
+  if (sessions.isValidSession(req)) {
+    var devices = sessions.getDevices(req);
+    devices = nav.demap(devices).values;
+    var data = {"cards":devices};
+    res.render('cards', data);
+  } else {
+    res.send('error').end();
   }
 });
 

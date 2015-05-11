@@ -1,8 +1,8 @@
 var sessions = require('../../lib/sessions.js');
 var express = require('express');
 var env = require('../../lib/loadConfig.js').read('config.json');
-var OAuth2 = require('googleapis').auth.OAuth2;
-var oauth2Client = new OAuth2(env.CLIENT_ID, env.CLIENT_SECRET, env.REDIRECT_URL);
+var google = require('googleapis');
+var OAuth2 = google.auth.OAuth2;
 
 var router = express.Router();
 
@@ -11,18 +11,43 @@ router.get('/', function(req, res) {
 });
 
 router.get('/oauth', function(req, res) {
-  res.end('ok');
+  var code = req.query.code;
+  var oauth2Client = new OAuth2(env.CLIENT_ID, env.CLIENT_SECRET, env.REDIRECT_URL);
+  oauth2Client.getToken(code, function(err, tokens) {
+    oauth2Client.setCredentials(tokens);
+    google.plus('v1').people.get({userId: 'me', auth: oauth2Client}, function(err, profile) {
+      console.log('profile', profile);
+      if (err) {
+        console.log('err', err);
+        res.redirect('/?error=true');
+        res.end();
+        return;
+      } 
+      if (!sessions.user(profile.id)) {
+        sessions.createUser(profile.id, null, profile);
+      }
+      var token = sessions.makeSession(profile.id);
+      res.cookie('token',token, { maxAge: 900000 });
+      res.redirect('/');
+      res.end();
+    });
+  });
+});
+
+router.get('/logout', function(req, res) {
+  var rStat = sessions.deleteSession(req);
+  if (req.query.redirect == "true") {
+    res.redirect('/');
+    res.end();
+  } else {
+    res.send(rStat);
+    res.end();
+  }
 });
 
 router.get('/log', function(req, res) {
   sessions.log();
   res.end();
-});
-
-router.get('/login', function(req, res) {
-  console.log(env); 
-  var url = oauth2Client.generateAuthUrl();
-  res.redirect(url);
 });
 
 router.post('/login', function(req, res) {
@@ -56,7 +81,7 @@ router.get('/org', sessions.verify, function(req, res) {
 
 router.post('/users', function(req, res) {
   if (req.body.username && req.body.password) {
-    sessions.createUser(req.body, function(err, data) {
+    sessions.createBcryptUser(req.body, function(err, data) {
       if (err) {
         res.send({"error":err});
         res.end();

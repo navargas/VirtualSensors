@@ -14,9 +14,13 @@
           src="/public/images/bluemix-icon.png">
       </a>
       <a class="navbar-brand" href="/">Virtual Sensors</a>
+      {{#if username}}
+      <a class="navbar-brand rightinfo" href="/api/v1/auth/logout?redirect=true">Log out</a>
+      <a class="navbar-brand rightinfo">{{username}}</a>
+      {{/if}}
     </nav>
-    {{{body}}}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    {{{body}}}
     <script src="/public/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
