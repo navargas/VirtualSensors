@@ -26,6 +26,11 @@ router.get('/', function(req, res) {
   }
 });
 
+router.get('/newdevice', function(req, res) {
+  var data = {"layout":"blank"}
+  res.render('newdevice', data);
+});
+
 router.get('/cards', function(req, res) {
   if (sessions.isValidSession(req)) {
     var devices = sessions.getDevices(req);

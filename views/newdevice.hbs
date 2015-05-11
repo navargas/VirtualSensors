@@ -1,0 +1,24 @@
+<div class="flex-container">
+  <div class="oauthprompt">
+    <h3>Create New Device</h3>
+    <form action="api/v1/sensors?redirect=true" method=POST>
+      <div><div class="inputitem">
+        <span>Name: </span>
+        <input name=name type=text class=holo />
+      </div></div>
+      <div><div class="inputitem">
+        <span>Units: </span>
+        <input name=unit type=text class=holo />
+      </div></div>
+      <div><div class="inputitem">
+        <span>Min: </span>
+        <input name=min type=text style="flex:1 1 60px;width:60px;" class=holo />
+      </div></div>
+      <div><div class="inputitem">
+        <span>Max: </span>
+        <input name=max type=text style="flex:1 1 60px;width:60px;" class=holo />
+      </div></div>
+      <button>Submit</button>
+    </form>
+  </div>
+</div>

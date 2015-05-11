@@ -104,12 +104,12 @@ device=$(./new_device.sh $token $devicename 2>/dev/null)
 info "$device"
 checkstatus "$device"; utest
 
-title "Check for device"
-result=$(./get_devices.sh $token 2>/dev/null)
-device=$(getproperty $result "$devicename")
-short=$(echo $device | cut -c1-71)...
-info "$short"
-notnull $device ; utest
+#title "Check for device"
+#result=$(./get_devices.sh $token 2>/dev/null)
+#device=$(getproperty $result "$devicename")
+#short=$(echo $device | cut -c1-71)...
+#info "$short"
+#notnull $device ; utest
 
 title "Delete device"
 result=$(./delete_device.sh $token $devicename 2>/dev/null)

@@ -80,6 +80,11 @@ router.get('/org', sessions.verify, function(req, res) {
 });
 
 router.post('/users', function(req, res) {
+  if (!env.debug) {
+    res.send({"error":"debug mode not enabled"});
+    res.end();
+    return;
+  }
   if (req.body.username && req.body.password) {
     sessions.createBcryptUser(req.body, function(err, data) {
       if (err) {

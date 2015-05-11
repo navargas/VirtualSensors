@@ -12,11 +12,29 @@ router.get('/', sessions.verify, function(req, res) {
 
 router.post('/', sessions.verify, function(req, res) {
   if (!req.body.device) {
-    res.send({"error":"Missing or invalid device"});
+    req.body.device = {
+      "unit": req.body.unit,
+      "name": req.body.name,
+      "min": parseInt(req.body.min),
+      "max": parseInt(req.body.max),
+      "interval": req.body.interval
+    };
   }
   var info = sessions.addDevice(req, req.body.device);
+  if (req.query.redirect) {
+    res.redirect('/');
+    res.end();
+    return;
+  };
   info.status = 'ok';
   res.send(info);
+  res.end();
+});
+
+router.get('/delete', sessions.verify, function(req, res) {
+  var devName = req.query.device;
+  var info = sessions.removeDevice(req, devName);
+  res.redirect('/');
   res.end();
 });
 

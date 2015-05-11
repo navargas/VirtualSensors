@@ -1,6 +1,7 @@
 {{#each cards}}
 <div class="outlinebox">
   <div class="outlinecontrols">
+    <a href='/api/v1/sensors/delete?device={{name}}'>&#10005</a>
     <h1>{{name}}</h1>
     <div class="uparrow">&#x25B2;</div>
     <div class="numberval">{{current}}</div>
@@ -10,7 +11,8 @@
   </div>
 </div>
 {{/each}}
-<div class="outlinebox newoutlinebox">
+<div onclick="location.href='/newdevice';" style="cursor: pointer;"
+ class="outlinebox newoutlinebox">
   <div class="outlinecontrols">
     <h1>new</h1>
     <div class="numberval" style="font-size:120px;margin-top:-40px">+</div>
