@@ -34,8 +34,9 @@ router.get('/newdevice', function(req, res) {
 router.get('/cards', function(req, res) {
   if (sessions.isValidSession(req)) {
     var devices = sessions.getDevices(req);
+    var topic = sessions.getOrg(req).topic;
     devices = nav.demap(devices).values;
-    var data = {"cards":devices};
+    var data = {"cards":devices, "topic":topic};
     res.render('cards', data);
   } else {
     res.send('error').end();
