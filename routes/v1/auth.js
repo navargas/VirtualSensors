@@ -3,7 +3,7 @@ var express = require('express');
 var env = require('../../lib/loadConfig.js').read('config.json');
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
-
+var TOKEN_AGE = 900000000;
 var router = express.Router();
 
 router.get('/', function(req, res) {
@@ -27,7 +27,7 @@ router.get('/oauth', function(req, res) {
         sessions.createUser(profile.id, null, profile);
       }
       var token = sessions.makeSession(profile.id);
-      res.cookie('token',token, { maxAge: 900000 });
+      res.cookie('token',token, { maxAge: TOKEN_AGE });
       res.redirect('/');
       res.end();
     });
@@ -57,7 +57,7 @@ router.post('/login', function(req, res) {
         res.send({"error":err});
         res.end();
       } else {
-        res.cookie('token',token, { maxAge: 900000 });
+        res.cookie('token',token, { maxAge: TOKEN_AGE });
         if (req.query.redirect == 'yes') {
           res.redirect('/');
           res.end();
