@@ -3,9 +3,18 @@ var sessions = require('../lib/sessions.js');
 var nav = require('../lib/nav.js');
 var env = require('../lib/loadConfig.js').read('config.json');
 var OAuth2 = require('googleapis').auth.OAuth2;
-var oauth2Client = new OAuth2(env.CLIENT_ID, env.CLIENT_SECRET, env.REDIRECT_URL);
+var useOauth = true;
 var router = express.Router();
-var debug = true;
+var oauth2Client = null;
+var DEBUG_USER = 'DEV-USER-001'
+var TOKEN_AGE = 900000000;
+
+if (env.CLIENT_ID && env.CLIENT_SECRET && env.REDIRECT_URL) {
+  var oauth2Client = new OAuth2(env.CLIENT_ID, env.CLIENT_SECRET, env.REDIRECT_URL);
+  useOauth = true;
+} else {
+  useOauth = false;
+}
 
 router.get('/', function(req, res) {
   if (sessions.isValidSession(req)) {
@@ -20,9 +29,19 @@ router.get('/', function(req, res) {
       data.username = user.google.displayName;
     }
     res.render('index', data);
-  } else {
+  } else if (useOauth) {
     var url = oauth2Client.generateAuthUrl({"scope":"email", "response_type":"code"});
     res.render('login', {"layout":"blank","oauthurl":url});
+  } else {
+    if (!sessions.user(DEBUG_USER)) {
+      sessions.createUser(DEBUG_USER, null, null);
+      console.log('DEBUG USER CREATED');
+    }
+    var token = sessions.makeSession(DEBUG_USER);
+    console.log('DEBUG USER AUTHENTICATED');
+    res.cookie('token',token, { maxAge: TOKEN_AGE });
+    res.redirect('/');
+    res.end();
   }
 });
 

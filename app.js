@@ -5,11 +5,14 @@ var cookieParser = require('cookie-parser');
 var handlebarsExpress = require('express-handlebars');
 var partials = require('express-partials');
 var iot = require('./lib/iot.js');
-var conf = require('./lib/loadConfig.js');
+var env = require('./lib/loadConfig.js').read('config.json');
 var V1 = './routes/v1/';
 
-iot.init();
-conf.read('config.json');
+if (env.noiot == 'true') {
+  console.log('IoT Disabled from conf file');
+} else {
+  iot.init();
+}
 
 // defensiveness against errors parsing request bodies...
 process.on('uncaughtException', function (err) {
