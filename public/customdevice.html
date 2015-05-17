@@ -16,12 +16,43 @@
           src="/public/images/bluemix-icon.png">
       </a>
       <a class="navbar-brand" href="/">Virtual Sensors</a>
-      {{#if username}}
       <a class="navbar-brand rightinfo" href="/api/v1/auth/logout?redirect=true">Log out</a>
-      {{/if}}
     </nav>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    {{{body}}}
+<!--WWW-->
+<div class="flex-container">
+  <!-- Nav tabs -->
+  <div class="optionbox" role="tabpanel">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#syntax" aria-controls="syntax" role="tab" data-toggle="tab">{}</a></li>
+      <li role="presentation">
+        <a href="#vars" aria-controls="vars" role="tab" data-toggle="tab">var</a></li>
+      <!-- <li role="presentation">
+        <a href="#devid" aria-controls="devid" role="tab" data-toggle="tab">ID</a>
+      </li> -->
+    </ul>
+    <div class="optioncontent">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="syntax">
+          <h3>Syntax</h3>
+<textarea>{
+  "name":"device01",
+  "value":RANDOM_1,
+  "type":thermometer
+}</textarea>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="vars">
+          <h3>Variables</h3>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="devid">
+          <h3>Device ID</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--WWW-->
     <script src="/public/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
