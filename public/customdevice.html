@@ -52,7 +52,7 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="vars">
           <h3>Variables</h3>
-          <form>
+          <form style="margin-bottom:4px;">
             <select id="selectvar">
               <option>Loading...</option>
             </select>
@@ -61,7 +61,7 @@
           <form class="inputbox" id="vartypeform">
             <input type="radio" name="vartype" value="script">javascript</input>
             <input type="radio" name="vartype" value="rnum">random number</input>
-            <input type="radio" name="vartype" value="custom">static</input>
+            <input type="radio" name="vartype" value="custom" checked="checked">static</input>
           </form>
           <div id="scriptpane" style="display:none">
             <textarea id="scriptbox" style="height:185px;"></textarea>
@@ -69,7 +69,7 @@
           <div class="panebox" id="rnumpane" style="display:none">
             <p>Random Number</p>
           </div>
-          <div class="panebox" id="custompane" style="display:none">
+          <div class="panebox" id="custompane">
             <p>
               This value will be selected when each individual device is created.
             </p>

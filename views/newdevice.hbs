@@ -2,20 +2,20 @@
   <div class="oauthprompt">
     <h3>Create New Device</h3>
     <div style="display:none" id="currenttemplate">{{template}}</div>
-    <span>Template:</span>
-    <select id=devicetemplateselect>
-      {{#each templates}}
-      <option value={{name}}>{{name}}</option>
-      {{/each}}
-      <option value="modifytemplates">Modify templates</option>
-    </select>
     <form action="api/v1/sensors?redirect=true" method=POST>
+      <span>Template:</span>
+      <select name="templateprofile" id=devicetemplateselect>
+        {{#each templates}}
+        <option value={{name}}>{{name}}</option>
+        {{/each}}
+      </select>
       {{#each options}}
       <div><div class="inputitem">
         <span>{{name}}: </span>
         <input name={{name}} type=text class=holo />
       </div></div>
       {{/each}}
+      <button id="edittemplates">Edit Templates</button>
       <button>Submit</button>
     </form>
   </div>

@@ -14,13 +14,23 @@ $(function() {
   var RandomPane = $('#rnumpane');
   var BackButton = $('.backbutton');
   var cache = {};
+  function getCookieValue(a, b) {
+    b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
+    return b ? b.pop() : '';
+  }
   function initUI(data, initialName) {
     if (!data) {
       data = cache;
     } else {
       cache = data;
     }
-    if (!initialName) initialName = Object.keys(data)[0];
+    if (!initialName) {
+      var templatecookie = getCookieValue('template');
+      if (data[templatecookie])
+        initialName = templatecookie;
+      else
+        initialName = Object.keys(data)[0];
+    }
     console.log("ini name", initialName);
     var initial = data[initialName];
     if (!initial) {
@@ -75,13 +85,17 @@ $(function() {
       RadioForm.css('display','none');
     }
   }
-  function sendTemplate(name) {
+  function sendTemplate(name, syntax, variables) {
     profileobj = {};
     profileobj.name = name;
     profileobj.variables = {};
     if (cache[name] && cache[name].variables)
       profileobj.variables = cache[name].variables;
     profileobj.syntax = SyntaxBox.val();
+    if (syntax !== undefined)
+      profileobj.syntax = syntax;
+    if (variables !== undefined)
+      profileobj.variables = variables;
     console.log('Uploading', profileobj);
     $.post('/api/v1/sensors/profiles', {"profile":profileobj},
       function(data, httpstat) {
@@ -112,7 +126,7 @@ $(function() {
     var name = prompt('Please enter variable name');
     if (!name) return false;
     console.log(name);
-    var defaultvar = {"type":"none"};
+    var defaultvar = {"type":"static"};
     var template = SelectTemplate.val();
     console.log('Var,', template, defaultvar, cache[template]);
     cache[template].variables[name] = defaultvar;

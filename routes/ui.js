@@ -45,12 +45,13 @@ router.get('/', function(req, res) {
   }
 });
 
-router.get('/newdevice', function(req, res) {
+router.get('/newdevice', sessions.verify, function(req, res) {
   var templates = sessions.getProfiles(req);
   var currentTemplate = req.cookies.template;
   console.log('cookies', req.cookies);
   if (!templates[currentTemplate]) {
     res.cookie('template', Object.keys(templates)[0]);
+    currentTemplate = Object.keys(templates)[0];
   }
   var data = {
     "layout":"blank",
@@ -61,18 +62,23 @@ router.get('/newdevice', function(req, res) {
   for (name in templates) {
     if (!templates.hasOwnProperty(name)) continue;
     var templateObj = {"name":name};
-    if (name == currentTemplate)
+    if (name == currentTemplate) {
       data.templates.unshift(templateObj);
-    else
-      data.templates.push(templateObj);
-    var variables = templates[name].variables;
-    for (variable in variables) {
-      if (!variables.hasOwnProperty(variable)) continue;
-      if (variables[variable].type == 'static') {
-        data.options.push({"name":variable});
+      var variables = templates[name].variables;
+      for (variable in variables) {
+        if (!variables.hasOwnProperty(variable)) continue;
+        if (variables[variable].type == 'static') {
+          data.options.push({"name":variable});
+        }
       }
+    } else {
+      data.templates.push(templateObj);
     }
   }
+  if (data.templates.length == 0) {
+    data.templates.push({"name":"none found"});
+  }
+  console.log('sending...', data);
   res.render('newdevice', data);
 });
 

@@ -1,5 +1,6 @@
 $(function() {
   var SelectTemplate = $('#devicetemplateselect');
+  var EditTemplates = $('#edittemplates');
   SelectTemplate.change(function() {
     var option = $(this).children(":selected").val();
     console.log('option', option);
@@ -10,6 +11,10 @@ $(function() {
       document.cookie = 'template=' + option + ';';
       location.reload();
     }
+  });
+  EditTemplates.click(function() {
+    window.location.href = '/public/customdevice.html';
+    return false;
   });
   var currentTemplate = $('#currenttemplate').html();
 });
