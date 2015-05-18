@@ -3,3 +3,6 @@ config.json
 *.swp
 node_modules/*
 *.vim
+cfpush
+bluemix.json
+bluemix-settings.js
