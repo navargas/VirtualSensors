@@ -43,9 +43,10 @@
               <option>Loading...</option>
             </select>
             <button id="removetemplate">remove</button>
-            <button id="newtemplate">make copy</button>
+            <button id="newtemplate">new template</button>
           </form>
           <textarea id="syntaxbox"></textarea>
+          <button href='/newdevice' class="backbutton">back</button>
           <button id="savetemplate" class="subbutton">save</button>
           <script src="/public/deviceprofile.js"></script>
         </div>
@@ -60,7 +61,7 @@
           <form class="inputbox" id="vartypeform">
             <input type="radio" name="vartype" value="script">javascript</input>
             <input type="radio" name="vartype" value="rnum">random number</input>
-            <input type="radio" name="vartype" value="custom">custom</input>
+            <input type="radio" name="vartype" value="custom">static</input>
           </form>
           <div id="scriptpane" style="display:none">
             <textarea id="scriptbox" style="height:185px;"></textarea>
@@ -73,6 +74,7 @@
               This value will be selected when each individual device is created.
             </p>
           </div>
+          <button href='/newdevice' class="backbutton">back</button>
           <button id="savetemplatevar" class="subbutton">save</button>
         </div>
         <div role="tabpanel" class="tab-pane" id="devid">

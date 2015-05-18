@@ -12,6 +12,7 @@ $(function() {
   var ScriptPane = $('#scriptpane');
   var CustomPane = $('#custompane');
   var RandomPane = $('#rnumpane');
+  var BackButton = $('.backbutton');
   var cache = {};
   function initUI(data, initialName) {
     if (!data) {
@@ -26,14 +27,12 @@ $(function() {
       RemoveTemplateButton.css('display', 'none');
       SyntaxBox.prop('disabled', true);
       VariableTab.prop('disabled', true);
-      NewTemplateButton.text('new template');
       SelectTemplate.html('<option>(new)</option>');
       return;
     } else {
       RemoveTemplateButton.css('display', 'inline');
       SyntaxBox.removeAttr('disabled');
       VariableTab.removeAttr('disabled');
-      NewTemplateButton.text('make copy');
     }
     console.log('Loading', initial);
     SyntaxBox.val(initial.syntax);
@@ -135,6 +134,9 @@ $(function() {
       CustomPane.css('display', 'block');
       ScriptPane.css('display', 'none');
     }
+  });
+  BackButton.click(function() {
+    window.location.href = '/newdevice';
   });
   /* Select Box */
   SelectTemplate.change(function() {

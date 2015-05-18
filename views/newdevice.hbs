@@ -1,24 +1,23 @@
 <div class="flex-container">
   <div class="oauthprompt">
     <h3>Create New Device</h3>
+    <div style="display:none" id="currenttemplate">{{template}}</div>
+    <span>Template:</span>
+    <select id=devicetemplateselect>
+      {{#each templates}}
+      <option value={{name}}>{{name}}</option>
+      {{/each}}
+      <option value="modifytemplates">Modify templates</option>
+    </select>
     <form action="api/v1/sensors?redirect=true" method=POST>
+      {{#each options}}
       <div><div class="inputitem">
-        <span>Name: </span>
-        <input name=name type=text class=holo />
+        <span>{{name}}: </span>
+        <input name={{name}} type=text class=holo />
       </div></div>
-      <div><div class="inputitem">
-        <span>Units: </span>
-        <input name=unit type=text class=holo />
-      </div></div>
-      <div><div class="inputitem">
-        <span>Min: </span>
-        <input name=min type=text style="flex:1 1 60px;width:60px;" class=holo />
-      </div></div>
-      <div><div class="inputitem">
-        <span>Max: </span>
-        <input name=max type=text style="flex:1 1 60px;width:60px;" class=holo />
-      </div></div>
+      {{/each}}
       <button>Submit</button>
     </form>
   </div>
+  <script src="/public/newdevice.js"></script>
 </div>

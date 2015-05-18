@@ -46,7 +46,33 @@ router.get('/', function(req, res) {
 });
 
 router.get('/newdevice', function(req, res) {
-  var data = {"layout":"blank"}
+  var templates = sessions.getProfiles(req);
+  var currentTemplate = req.cookies.template;
+  console.log('cookies', req.cookies);
+  if (!templates[currentTemplate]) {
+    res.cookie('template', Object.keys(templates)[0]);
+  }
+  var data = {
+    "layout":"blank",
+    "options": [],
+    "template":currentTemplate,
+    "templates":[]
+  };
+  for (name in templates) {
+    if (!templates.hasOwnProperty(name)) continue;
+    var templateObj = {"name":name};
+    if (name == currentTemplate)
+      data.templates.unshift(templateObj);
+    else
+      data.templates.push(templateObj);
+    var variables = templates[name].variables;
+    for (variable in variables) {
+      if (!variables.hasOwnProperty(variable)) continue;
+      if (variables[variable].type == 'static') {
+        data.options.push({"name":variable});
+      }
+    }
+  }
   res.render('newdevice', data);
 });
 
