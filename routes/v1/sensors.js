@@ -31,6 +31,20 @@ router.post('/', sessions.verify, function(req, res) {
   res.end();
 });
 
+router.get('/profiles', sessions.verify, function(req, res) {
+  res.send(sessions.getProfiles(req));
+  res.end();
+});
+
+router.post('/profiles', sessions.verify, function(req, res) {
+  console.log(req.body.profile);
+  if (req.body.cmd == 'delete')
+    res.send(sessions.deleteProfile(req, req.body.profilename));
+  else
+    res.send(sessions.setProfile(req, req.body.profile));
+  res.end();
+});
+
 router.get('/delete', sessions.verify, function(req, res) {
   var devName = req.query.device;
   var info = sessions.removeDevice(req, devName);

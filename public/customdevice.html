@@ -27,7 +27,9 @@
       <li role="presentation" class="active">
         <a href="#syntax" aria-controls="syntax" role="tab" data-toggle="tab">{}</a></li>
       <li role="presentation">
-        <a href="#vars" aria-controls="vars" role="tab" data-toggle="tab">var</a></li>
+        <a href="#vars" aria-controls="vars" role="tab" id="vartab"data-toggle="tab">
+          var
+        </a></li>
       <!-- <li role="presentation">
         <a href="#devid" aria-controls="devid" role="tab" data-toggle="tab">ID</a>
       </li> -->
@@ -35,15 +37,43 @@
     <div class="optioncontent">
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="syntax">
-          <h3>Syntax</h3>
-<textarea>{
-  "name":"device01",
-  "value":RANDOM_1,
-  "type":thermometer
-}</textarea>
+          <h3>JSON Format</h3>
+          <form>
+            <select id="selectdevice">
+              <option>Loading...</option>
+            </select>
+            <button id="removetemplate">remove</button>
+            <button id="newtemplate">make copy</button>
+          </form>
+          <textarea id="syntaxbox"></textarea>
+          <button id="savetemplate" class="subbutton">save</button>
+          <script src="/public/deviceprofile.js"></script>
         </div>
         <div role="tabpanel" class="tab-pane" id="vars">
           <h3>Variables</h3>
+          <form>
+            <select id="selectvar">
+              <option>Loading...</option>
+            </select>
+            <button id="newvariable">new variable</button>
+          </form>
+          <form class="inputbox" id="vartypeform">
+            <input type="radio" name="vartype" value="script">javascript</input>
+            <input type="radio" name="vartype" value="rnum">random number</input>
+            <input type="radio" name="vartype" value="custom">custom</input>
+          </form>
+          <div id="scriptpane" style="display:none">
+            <textarea id="scriptbox" style="height:185px;"></textarea>
+          </div>
+          <div class="panebox" id="rnumpane" style="display:none">
+            <p>Random Number</p>
+          </div>
+          <div class="panebox" id="custompane" style="display:none">
+            <p>
+              This value will be selected when each individual device is created.
+            </p>
+          </div>
+          <button id="savetemplatevar" class="subbutton">save</button>
         </div>
         <div role="tabpanel" class="tab-pane" id="devid">
           <h3>Device ID</h3>

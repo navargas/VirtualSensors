@@ -32,6 +32,39 @@
   height:100%;
 }
 
+.subbutton {
+  position:absolute;
+  bottom:8px;
+  right:0;
+  float: right;
+  margin: 8px;
+  margin-right: 20px;
+}
+
+.optioncontent select {
+  font-size: 18px;
+  font-family: monospace;
+  margin-left: 15px;
+}
+
+.optioncontent form select, .optioncontent form button {
+  vertical-align: middle;
+}
+
+.optioncontent .inputbox {
+  margin-left: 2px;
+  margin-top: 14px;
+  font-size: 17px;
+}
+.optioncontent .inputbox input[type="radio"] {
+  margin-left: 14px;
+  margin-right: 4px;
+}
+
+.optioncontent button[disabled=disabled], .optioncontent button:disabled {
+  background-color: #444;
+}
+
 .optioncontent .tab-content {
   height:100%;
 }
@@ -39,19 +72,28 @@
 .optioncontent .tab-pane.active {
 }
 
+.panebox {
+  padding:18px;
+}
+
 .optioncontent textarea {
   display: block;
   padding: 10px;
   margin:auto;
-  height:250px;
+  margin-top: 10px;
+  height:210px;
   min-height:100%;
-  width: 90%;
+  width: 92%;
   resize: none;
   box-sizing: border-box;         /* For IE and modern versions of Chrome */
   -moz-box-sizing: border-box;    /* For Firefox                          */
   -webkit-box-sizing: border-box; /* For Safari                           */
   font-size: 18px;
   font-family: monospace;
+}
+
+#scriptbox {
+  font-size: 14px;
 }
 
 .optionbox ul {
