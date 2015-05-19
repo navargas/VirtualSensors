@@ -3,11 +3,22 @@
   <div class="outlinecontrols">
     <a class="deletebutton" href='/api/v1/sensors/delete?device={{name}}'>&#10005</a>
     <h1>{{static.templateprofile}}</h1>
-    <p>{{name}}<p>
+    <p>{{name}}</p>
     <a href="javascript:var t=prompt('','{{../topic}}');">Get DeviceID</a>
     <div class="uparrow">&#x25B2;</div>
     <div class="numberval">{{displayvalue}}</div>
     <div class="downarrow">&#x25BC;</div>
+  </div>
+  <div class="outlinefooter">
+  </div>
+</div>
+{{/each}}
+{{#each notices}}
+<div class="outlinebox">
+  <div class="outlinecontrols">
+    <a class="deletebutton" href='/api/v1/sensors/acknowledge?msg={{name}}'>&#10005</a>
+    <h1>Notice</h1>
+    <p>{{message}}</p>
   </div>
   <div class="outlinefooter">
   </div>

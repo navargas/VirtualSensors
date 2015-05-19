@@ -45,6 +45,13 @@ router.post('/profiles', sessions.verify, function(req, res) {
   res.end();
 });
 
+router.get('/acknowledge', sessions.verify, function(req, res) {
+  var msg = req.query.msg;
+  var info = sessions.acknowledge(req, msg);
+  res.redirect('/');
+  res.end();
+});
+
 router.get('/delete', sessions.verify, function(req, res) {
   var devName = req.query.device;
   var info = sessions.removeDevice(req, devName);

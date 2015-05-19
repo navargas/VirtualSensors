@@ -9,6 +9,12 @@ var oauth2Client = null;
 var DEBUG_USER = 'DEV-USER-001'
 var TOKEN_AGE = 900000000;
 
+var NOTICES = [
+  {"name":"1",
+   "message": "This product is currently in alpha. Devices and templates are subject to change. " +
+              "Database replication temporarily disabled so devices may disappear intermittently."}
+];
+
 if (env.CLIENT_ID && env.CLIENT_SECRET && env.REDIRECT_URL) {
   var oauth2Client = new OAuth2(env.CLIENT_ID, env.CLIENT_SECRET, env.REDIRECT_URL);
   useOauth = true;
@@ -87,7 +93,12 @@ router.get('/cards', function(req, res) {
     var devices = sessions.getDevices(req);
     var topic = sessions.getOrg(req).topic;
     devices = nav.demap(devices).values;
-    var data = {"cards":devices, "topic":topic};
+    var ack = sessions.getAcknowledge(req);
+    var data = {"cards":devices, "topic":topic, "notices":[]};
+    for (notice in NOTICES) {
+      if (!NOTICES.hasOwnProperty(notice)) continue;
+      if (!(notice in ack)) data.notices.push(NOTICES[notice]);
+    };
     res.render('cards', data);
   } else {
     res.send('error').end();
