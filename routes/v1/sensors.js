@@ -11,16 +11,16 @@ router.get('/', sessions.verify, function(req, res) {
 });
 
 router.post('/', sessions.verify, function(req, res) {
+  var deviceObj = {};
   if (!req.body.device) {
-    req.body.device = {
-      "unit": req.body.unit,
+    deviceObj = {
       "name": req.body.name,
-      "min": parseInt(req.body.min),
-      "max": parseInt(req.body.max),
-      "interval": req.body.interval
+      "static":req.body
     };
+  } else {
+    deviceObj = req.body.device;
   }
-  var info = sessions.addDevice(req, req.body.device);
+  var info = sessions.addDevice(req, deviceObj);
   if (req.query.redirect) {
     res.redirect('/');
     res.end();

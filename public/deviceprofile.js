@@ -67,6 +67,15 @@ $(function() {
     }
     initUI(data, null);
   });
+  function checkOverwrite() {
+    var template = SelectTemplate.val();
+    if (cache[template] && SyntaxBox.val() !== cache[template].syntax) {
+      var resp = confirm('There are unsaved changes. ' +
+                         'Are you sure you wish to continue?');
+      return resp;
+    }
+    return true;
+  }
   function loadVariables(name, show) {
     var templateObj = cache[name];
     SelectVariable.html('');
@@ -109,18 +118,22 @@ $(function() {
     return false;
   });
   NewTemplateButton.click(function() {
+    if (!checkOverwrite()) return false;
     var name = prompt('Please enter template name');
     if (!name) return false;
+    SyntaxBox.val('');
     sendTemplate(name);
     return false;
   });
   RemoveTemplateButton.click(function() {
     var cmd = {"cmd":"delete", "profilename":SelectTemplate.val()};
+    confirm('Are you sure you wish to delete?');
     $.post('/api/v1/sensors/profiles', cmd,
       function(data, httpstat) {
         initUI(data, null);
       }
     );
+    return false;
   });
   NewVariableButton.click(function() {
     var name = prompt('Please enter variable name');
@@ -150,7 +163,9 @@ $(function() {
     }
   });
   BackButton.click(function() {
+    if (!checkOverwrite()) return false;
     window.location.href = '/newdevice';
+    return false;
   });
   /* Select Box */
   SelectTemplate.change(function() {

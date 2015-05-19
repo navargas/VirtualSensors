@@ -1,9 +1,10 @@
 {{#each cards}}
 <div class="outlinebox">
   <div class="outlinecontrols">
-    <a href='/api/v1/sensors/delete?device={{name}}'>&#10005</a>
-    <h1>{{name}}</h1>
-    <p>{{../topic}}</p>
+    <a class="deletebutton" href='/api/v1/sensors/delete?device={{name}}'>&#10005</a>
+    <h1>{{static.templateprofile}}</h1>
+    <p>{{name}}<p>
+    <a href="javascript:var t=prompt('','{{../topic}}');">Get DeviceID</a>
     <div class="uparrow">&#x25B2;</div>
     <div class="numberval">{{current}}</div>
     <div class="downarrow">&#x25BC;</div>
