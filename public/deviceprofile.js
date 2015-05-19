@@ -13,6 +13,9 @@ $(function() {
   var CustomPane = $('#custompane');
   var RandomPane = $('#rnumpane');
   var BackButton = $('.backbutton');
+  var DisplayUIButton = $('.useui');
+  var VariableMinInput = $('#varmin');
+  var VariableMaxInput = $('#varmax');
   var cache = {};
   function getCookieValue(a, b) {
     b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
@@ -69,7 +72,11 @@ $(function() {
   });
   function checkOverwrite() {
     var template = SelectTemplate.val();
+    var hasChange = false;
     if (cache[template] && SyntaxBox.val() !== cache[template].syntax) {
+      hasChange = true;
+    }
+    if (hasChange) {
       var resp = confirm('There are unsaved changes. ' +
                          'Are you sure you wish to continue?');
       return resp;
@@ -117,7 +124,23 @@ $(function() {
       }
     );
   }
+  DisplayUIButton.click(function() {
+    var template = SelectTemplate.val();
+    var onVar = SelectVariable.val();
+    var variables = cache[template].variables;
+    for (variable in variables) {
+      if (!variables.hasOwnProperty(variable)) continue;
+      var vObj = variables[variable];
+      if (variable == onVar) {
+        vObj.display = 'yes';
+      } else {
+        vObj.display = 'no';
+      }
+    }
+    return false;
+  });
   SaveTemplateButton.click(function() {
+    saveVarState();
     sendTemplate(SelectTemplate.val());
     return false;
   });
@@ -157,6 +180,7 @@ $(function() {
     console.log('radio', value);
     var template = SelectTemplate.val();
     var variable = SelectVariable.val();
+    var vObj = cache[template].variables[variable];
     if (value == 'script') {
       RandomPane.css('display', 'none');
       CustomPane.css('display', 'none');
@@ -165,12 +189,25 @@ $(function() {
       RandomPane.css('display', 'block');
       CustomPane.css('display', 'none');
       ScriptPane.css('display', 'none');
+      VariableMinInput.val(vObj.min || 0);
+      VariableMaxInput.val(vObj.max || 10);
     } else {
       RandomPane.css('display', 'none');
       CustomPane.css('display', 'block');
       ScriptPane.css('display', 'none');
     }
-    cache[template].variables[variable].type = value;
+  }
+  function saveVarState() {
+    var template = SelectTemplate.val();
+    var variable = SelectVariable.val();
+    if (!variable) return;
+    var vartype = VarTypeRadio.filter(':checked').val();
+    var vObj = cache[template].variables[variable];
+    vObj.type = vartype;
+    if (vartype == 'random') {
+      vObj.max = parseInt(VariableMaxInput.val());
+      vObj.min = parseInt(VariableMinInput.val());
+    }
   }
   BackButton.click(function() {
     if (!checkOverwrite()) return false;

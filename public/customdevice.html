@@ -66,13 +66,22 @@
           <div id="scriptpane" style="display:none">
             <textarea id="scriptbox" style="height:185px;"></textarea>
           </div>
-          <div class="panebox" id="rnumpane" style="display:none">
-            <p>Random Number</p>
+          <div class="panebox" id="rnumpane" style="display:block;width:50%;margin: 0 auto;">
+            <div class="inputitem">
+              <span>Min: </span>
+              <input name=min type=text class=holo id=varmin />
+            </div>
+            <div class="inputitem">
+              <span>Max: </span>
+              <input name=max type=text class=holo id=varmax />
+            </div>
+            <button class="useui">Display on UI</button>
           </div>
           <div class="panebox" id="custompane">
             <p>
               This value will be selected when each individual device is created.
             </p>
+            <button class="useui">Display on UI</button>
           </div>
           <button href='/newdevice' class="backbutton">back</button>
           <button id="savetemplatevar" class="subbutton">save</button>

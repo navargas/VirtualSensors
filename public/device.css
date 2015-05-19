@@ -54,6 +54,7 @@
   font-size: 18px;
   font-family: monospace;
   margin-left: 15px;
+  max-width:176px;
 }
 
 .optioncontent form select, .optioncontent form button {
@@ -83,6 +84,14 @@
 
 .panebox {
   padding:18px;
+}
+
+.panebox .inputitem {
+  width: 100px;
+}
+
+.panebox .inputitem input {
+  text-align: right;
 }
 
 .optioncontent textarea {
