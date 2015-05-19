@@ -5,6 +5,7 @@ $(function() {
   var RemoveTemplateButton = $('#removetemplate');
   var NewTemplateButton = $('#newtemplate');
   var NewVariableButton = $('#newvariable');
+  var DeleteVariableButton = $('#removevariable');
   var SaveTemplateButton = $('#savetemplate, #savetemplatevar');
   var VariableTab = $('#vartab');
   var VarTypeRadio = $('input[type=radio][name=vartype]');
@@ -16,6 +17,7 @@ $(function() {
   var DisplayUIButton = $('.useui');
   var VariableMinInput = $('#varmin');
   var VariableMaxInput = $('#varmax');
+  var ScriptBox = $('#scriptbox');
   var cache = {};
   function getCookieValue(a, b) {
     b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
@@ -38,6 +40,7 @@ $(function() {
     var initial = data[initialName];
     if (!initial) {
       RemoveTemplateButton.css('display', 'none');
+      SyntaxBox.val('');
       SyntaxBox.prop('disabled', true);
       VariableTab.prop('disabled', true);
       SelectTemplate.html('<option>(new)</option>');
@@ -84,6 +87,7 @@ $(function() {
     return true;
   }
   function loadVariables(name, show) {
+    if (!name) name = SelectTemplate.val();
     var templateObj = cache[name];
     SelectVariable.html('');
     for (variable in templateObj.variables) {
@@ -103,7 +107,18 @@ $(function() {
       RadioForm.css('display','inline');
     } else {
       RadioForm.css('display','none');
+      RandomPane.css('display', 'none');
+      CustomPane.css('display', 'none');
+      ScriptPane.css('display', 'none');
     }
+    var boilerplate =  'var datetime = currentdate.getFullYear() + "-"\n' +
+                       '  + (1e15+(currentdate.getMonth()+1)+"").slice(-2) + "-"\n' +
+                       '  + (1e15+currentdate.getDate()+"").slice(-2) + " "\n' +
+                       '  + (1e15+currentdate.getHours()+"").slice(-2) + ":"\n' +
+                       '  + (1e15+currentdate.getMinutes()+"").slice(-2) + ":"\n' +
+                       '  + (1e15+currentdate.getSeconds()+"").slice(-2);\n' +
+                       'return datetime;';
+    ScriptBox.val(boilerplate);
   }
   function sendTemplate(name, syntax, variables) {
     profileobj = {};
@@ -173,6 +188,13 @@ $(function() {
     loadVariables(template, name);
     return false;
   });
+  DeleteVariableButton.click(function() {
+    var template = SelectTemplate.val();
+    var variable = SelectVariable.val();
+    delete cache[template].variables[variable];
+    loadVariables();
+    return false;
+  });
   VarTypeRadio.change(function() {
     setVarRadio(this.value);
   });
@@ -211,6 +233,8 @@ $(function() {
   }
   BackButton.click(function() {
     if (!checkOverwrite()) return false;
+    var onTemplate = SelectTemplate.val();
+    if (onTemplate) document.cookie = 'template=' + onTemplate + ';path=/';
     window.location.href = '/newdevice';
     return false;
   });

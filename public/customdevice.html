@@ -56,6 +56,7 @@
             <select id="selectvar">
               <option>Loading...</option>
             </select>
+            <button id="removevariable">delete</button>
             <button id="newvariable">new variable</button>
           </form>
           <form class="inputbox" id="vartypeform">
@@ -64,7 +65,8 @@
             <input type="radio" name="vartype" value="static" checked="checked">prompt</input>
           </form>
           <div id="scriptpane" style="display:none">
-            <textarea id="scriptbox" style="height:185px;"></textarea>
+            <textarea id="scriptbox" style="height:185px;font-size:12px" wrap=off disabled="disabled">
+            </textarea>
           </div>
           <div class="panebox" id="rnumpane" style="display:block;width:50%;margin: 0 auto;">
             <div class="inputitem">

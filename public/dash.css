@@ -50,11 +50,6 @@ body {
   box-shadow: 0px 0px 5pt 1pt rgba(0, 0, 0, 0.3);
 }
 
-.outlinebox h1 {
-  margin-top: 4px;
-  margin-bottom: 8px;
-}
-
 .deletebutton {
   float: right;
   margin-right:8px;
@@ -110,7 +105,9 @@ body {
 }
 
 .outlinebox h1 {
-  font-size: 28px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-size: 25px;
   text-align: center;
   padding-top: 4px;
 }
