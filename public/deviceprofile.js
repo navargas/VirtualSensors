@@ -89,6 +89,10 @@ $(function() {
     if (!show) show = Object.keys(templateObj.variables)[0];
     if (show) {
       SelectVariable.val(show);
+      var varType = templateObj.variables[show].type;
+      console.log('Setting radio to', varType);
+      VarTypeRadio.val([varType])
+      setVarRadio(varType);
       RadioForm.css('display','inline');
     } else {
       RadioForm.css('display','none');
@@ -147,12 +151,17 @@ $(function() {
     return false;
   });
   VarTypeRadio.change(function() {
-    console.log('radio', this.value);
-    if (this.value == 'script') {
+    setVarRadio(this.value);
+  });
+  function setVarRadio(value) {
+    console.log('radio', value);
+    var template = SelectTemplate.val();
+    var variable = SelectVariable.val();
+    if (value == 'script') {
       RandomPane.css('display', 'none');
       CustomPane.css('display', 'none');
       ScriptPane.css('display', 'block');
-    } else if (this.value == 'rnum') {
+    } else if (value == 'random') {
       RandomPane.css('display', 'block');
       CustomPane.css('display', 'none');
       ScriptPane.css('display', 'none');
@@ -161,7 +170,8 @@ $(function() {
       CustomPane.css('display', 'block');
       ScriptPane.css('display', 'none');
     }
-  });
+    cache[template].variables[variable].type = value;
+  }
   BackButton.click(function() {
     if (!checkOverwrite()) return false;
     window.location.href = '/newdevice';
@@ -174,9 +184,6 @@ $(function() {
   });
   SelectVariable.change(function() {
     var option = $(this).children(":selected").html();
-    loadVariableConf(option);
+    loadVariables(SelectTemplate.val(), option);
   });
-  function loadVariableConf(variable) {
-    console.log('Loaded', variable); 
-  }
 });
