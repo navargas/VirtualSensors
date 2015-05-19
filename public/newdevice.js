@@ -1,6 +1,7 @@
 $(function() {
   var SelectTemplate = $('#devicetemplateselect');
   var EditTemplates = $('#edittemplates');
+  var Back = $('#backbutton');
   SelectTemplate.change(function() {
     var option = $(this).children(":selected").val();
     console.log('option', option);
@@ -11,6 +12,10 @@ $(function() {
       document.cookie = 'template=' + option + ';';
       location.reload();
     }
+  });
+  Back.click(function() {
+    window.location.href = '/';
+    return false;
   });
   EditTemplates.click(function() {
     window.location.href = '/public/customdevice.html';
