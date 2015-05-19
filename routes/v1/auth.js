@@ -22,7 +22,7 @@ router.get('/oauth', function(req, res) {
         res.redirect('/?error=true');
         res.end();
         return;
-      } 
+      }
       if (!sessions.user(profile.id)) {
         sessions.createUser(profile.id, null, profile);
       }
