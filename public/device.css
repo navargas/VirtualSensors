@@ -94,6 +94,25 @@
   text-align: right;
 }
 
+.syntaxwell {
+  position: absolute;
+  top: 130px;
+  overflow: hidden;
+  bottom: 60px;
+  left: 30px;
+  right: 30px;
+}
+
+#livesyntax {
+  margin: 0;
+  position: absolute;
+  top: 130px;
+  overflow: hidden;
+  bottom: 60px;
+  left: 30px;
+  right: 30px;
+}
+
 .optioncontent textarea {
   display: block;
   padding: 10px;

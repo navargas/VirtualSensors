@@ -1,7 +1,7 @@
 $(function() {
   var SelectTemplate = $('select#selectdevice');
   var SelectVariable = $('select#selectvar');
-  var SyntaxBox = $('textarea#syntaxbox');
+  var SyntaxBox = $('#livesyntax');
   var RemoveTemplateButton = $('#removetemplate');
   var NewTemplateButton = $('#newtemplate');
   var NewVariableButton = $('#newvariable');
@@ -19,6 +19,10 @@ $(function() {
   var VariableMaxInput = $('#varmax');
   var ScriptBox = $('#scriptbox');
   var cache = {};
+
+  var editor = ace.edit('livesyntax');
+  editor.getSession().setMode("ace/mode/json");
+
   function getCookieValue(a, b) {
     b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
     return b ? b.pop() : '';
@@ -51,7 +55,7 @@ $(function() {
       VariableTab.removeAttr('disabled');
     }
     console.log('Loading', initial);
-    SyntaxBox.val(initial.syntax);
+    editor.getSession().setValue(initial.syntax);
     SelectTemplate.html('');
     for (option in data) {
       if (!data.hasOwnProperty(option)) continue;
@@ -76,7 +80,7 @@ $(function() {
   function checkOverwrite() {
     var template = SelectTemplate.val();
     var hasChange = false;
-    if (cache[template] && SyntaxBox.val() !== cache[template].syntax) {
+    if (cache[template] && editor.getSession().getValue() !== cache[template].syntax) {
       hasChange = true;
     }
     if (hasChange) {
@@ -126,7 +130,7 @@ $(function() {
     profileobj.variables = {};
     if (cache[name] && cache[name].variables)
       profileobj.variables = cache[name].variables;
-    profileobj.syntax = SyntaxBox.val();
+    profileobj.syntax = editor.getSession().getValue();
     if (syntax !== undefined)
       profileobj.syntax = syntax;
     if (variables !== undefined)
@@ -163,7 +167,7 @@ $(function() {
     if (!checkOverwrite()) return false;
     var name = prompt('Please enter template name');
     if (!name) return false;
-    SyntaxBox.val('');
+    editor.getSession().setValue('');
     sendTemplate(name);
     return false;
   });

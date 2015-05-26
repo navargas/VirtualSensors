@@ -45,10 +45,10 @@
             <button id="removetemplate">remove</button>
             <button id="newtemplate">new template</button>
           </form>
-          <textarea id="syntaxbox"></textarea>
+          <textarea style="display:none;" id="syntaxbox"></textarea>
+          <pre id="livesyntax"></pre>
           <button href='/newdevice' class="backbutton">back</button>
           <button id="savetemplate" class="subbutton">save</button>
-          <script src="/public/deviceprofile.js"></script>
         </div>
         <div role="tabpanel" class="tab-pane" id="vars">
           <h3>Variables</h3>
@@ -92,6 +92,9 @@
           <h3>Device ID</h3>
         </div>
       </div>
+      <script src="/public/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+      <script src="/public/ace/src-noconflict/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+      <script src="/public/deviceprofile.js"></script>
     </div>
   </div>
 </div>
