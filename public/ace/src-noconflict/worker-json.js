@@ -1514,27 +1514,14 @@ ace.define("ace/mode/json/json_parse",["require","exports","module"], function(r
 
             if (ch === '{') {
                 next('{');
-                /*if (ch === '{') {
-                    console.log('Double brace found');
-                    while (next()) {
-                        if (text.charAt(at) === '}' && text.charAt(at) === '}') {
-                            at += 2;
-                            console.log('double brace done. Advance to', text.charAt(at)); 
-                            break;
-                        };
-                    }
-                }*/
                 white();
-                console.log('Now on to', text.charAt(at));
                 if (ch === '}') {
                     next('}');
                     return object;   // empty object
                 }
                 while (ch) {
                     white();
-                    console.log('before str', at, '<', ch, '>', text.charAt(at), text.charAt(at+1), text.charAt(at+2));
                     key = string();
-                    console.log('after str');
                     white();
                     next(':');
                     if (Object.hasOwnProperty.call(object, key)) {
@@ -1546,7 +1533,6 @@ ace.define("ace/mode/json/json_parse",["require","exports","module"], function(r
                         next('}');
                         return object;
                     }
-                    console.log('before comma', at, '<', ch, '>', text.charAt(at), text.charAt(at+1), text.charAt(at+2));
                     next(',');
                     white();
                 }
@@ -1558,12 +1544,10 @@ ace.define("ace/mode/json/json_parse",["require","exports","module"], function(r
 
         white();
         if (text.charAt(at) === '{' && text.charAt(at) === '{') {
-            console.log('Double brace found');
             while (next()) {
                 if (text.charAt(at) === '}' && text.charAt(at) === '}') {
                     at += 3;
                     ch = text.charAt(at-1);
-                    console.log('double brace done. Advance to', text.charAt(at)); 
                     return "okcool";
                 };
             }
