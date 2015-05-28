@@ -15,11 +15,11 @@ var JsonHighlightRules = function() {
                 regex : '"',
                 next  : "string"
             }, {
-                token : "constant.numeric", // hex
-                regex : "0[xX][0-9a-fA-F]+\\b"
+                token : "constant.numeric", // {{double_curly}}
+                regex : "{{\\w+}}"
             }, {
-                token : "constant.numeric", // float
-                regex : "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?\\b"
+                token : "constant.numeric", // don't highlight numbers
+                regex : "$a"
             }, {
                 token : "constant.language.boolean",
                 regex : "(?:true|false)\\b"
