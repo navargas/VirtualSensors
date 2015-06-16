@@ -25,28 +25,15 @@
   <div class="optionbox" role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active">
-        <a href="#syntax" aria-controls="syntax" role="tab" data-toggle="tab">{}</a></li>
-      <li role="presentation">
-        <a href="#vars" aria-controls="vars" role="tab" id="vartab"data-toggle="tab">
-          var
-        </a></li>
-      <!-- <li role="presentation">
-        <a href="#devid" aria-controls="devid" role="tab" data-toggle="tab">ID</a>
-      </li> -->
+        <a href="#syntax" aria-controls="syntax"
+              role="tab" data-toggle="tab">Template Manager</a></li>
     </ul>
     <div class="optioncontent">
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="syntax">
-          <h3>JSON Format</h3>
-          <form>
-            <select id="selectdevice">
-              <option>Loading...</option>
-            </select>
-            <button id="removetemplate">remove</button>
-            <button id="newtemplate">new template</button>
-          </form>
-          <textarea style="display:none;" id="syntaxbox"></textarea>
-          <pre id="livesyntax"></pre>
+          <div class="tabtitle">JSON Message Format</div>
+          <div class="tabsubtitle">Double click variable to edit properties</div>
+          <div id="livesyntax"></div>
           <button href='/newdevice' class="backbutton">back</button>
           <button id="savetemplate" class="subbutton">save</button>
         </div>

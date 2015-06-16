@@ -21,6 +21,7 @@ $(function() {
   var cache = {};
 
   var editor = ace.edit('livesyntax');
+  editor.renderer.setShowGutter(false)
   editor.getSession().setMode("ace/mode/json");
 
   function getCookieValue(a, b) {

@@ -97,20 +97,26 @@
 .syntaxwell {
   position: absolute;
   top: 130px;
-  overflow: hidden;
   bottom: 60px;
   left: 30px;
   right: 30px;
 }
 
 #livesyntax {
-  margin: 0;
-  position: absolute;
-  top: 130px;
-  overflow: hidden;
-  bottom: 60px;
-  left: 30px;
-  right: 30px;
+  height: 230px;
+  border: 1px solid #555;
+  margin: 20px;
+  margin-top: 5px;
+}
+
+.tabtitle {
+  padding-left: 18px;
+  padding-top: 18px;
+}
+
+.tabsubtitle {
+  padding-left: 18px;
+  color: #999;
 }
 
 .optioncontent textarea {
