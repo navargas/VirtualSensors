@@ -27,20 +27,25 @@
       <li role="presentation" class="active">
         <a href="#syntax" aria-controls="syntax"
               role="tab" data-toggle="tab">Template Manager</a></li>
+      <li role="presentation" class="">
+        <a href="#vars" aria-controls="vars" style="display:none" id="vartab"
+              role="tab" data-toggle="tab"></a></li>
     </ul>
     <div class="optioncontent">
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="syntax">
-          <div class="tabtitle">JSON Message Format</div>
+          <div style="display:none;" class="tabtitle">
+            <span>Device Template:</span><select id=selectdevice><select>
+          </div>
           <div class="tabsubtitle">Double click variable to edit properties</div>
           <div id="livesyntax"></div>
-          <button href='/newdevice' class="backbutton">back</button>
+          <button href='/newdevice' class="backbutton" style="float:left;">discard changes</button>
           <button id="savetemplate" class="subbutton">save</button>
         </div>
         <div role="tabpanel" class="tab-pane" id="vars">
           <h3>Variables</h3>
           <form style="margin-bottom:4px;">
-            <select id="selectvar">
+            <select id="selectvar" style="margin-left:15px;">
               <option>Loading...</option>
             </select>
             <button id="removevariable">delete</button>

@@ -118,6 +118,15 @@ body {
   margin-right: auto;
 }
 
+.oauthprompt.newdeviceprompt {
+  font-size: 16px;
+}
+
+.oauthprompt.newdeviceprompt button {
+  font-size: 12px;
+  margin-right: -2px;
+}
+
 .oauthprompt {
   min-width: 275px;
   float: left;

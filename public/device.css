@@ -41,14 +41,18 @@
   margin-right: 20px;
 }
 
+#selectdevice {
+  font-size: 12px;
+}
+
 .backbutton {
   position:absolute;
   bottom:8px;
-  right:60px;
+  left:14px;
   float: right;
   margin: 8px;
   margin-right: 20px;
-}
+} */
 
 .optioncontent select {
   font-size: 18px;
@@ -103,7 +107,7 @@
 }
 
 #livesyntax {
-  height: 230px;
+  height: 260px;
   border: 1px solid #555;
   margin: 20px;
   margin-top: 5px;

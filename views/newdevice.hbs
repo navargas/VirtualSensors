@@ -1,14 +1,23 @@
 <div class="flex-container">
-  <div class="oauthprompt">
+  <div class="oauthprompt newdeviceprompt">
     <h3>Create New Device</h3>
     <div style="display:none" id="currenttemplate">{{template}}</div>
     <form action="api/v1/sensors?redirect=true" method=POST>
-      <span>Template:</span>
+      <span>Type:</span>
       <select name="templateprofile" id=devicetemplateselect>
         {{#each templates}}
         <option value={{name}}>{{name}}</option>
         {{/each}}
       </select>
+      <button id="deletetemplate">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </button>
+      <button id="edittemplates">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+      </button>
+      <button id="addnewtemplate">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
       {{#each options}}
       <div><div class="inputitem">
         <span>{{name}}: </span>
@@ -17,9 +26,9 @@
       {{else}}
       <br>
       {{/each}}
-      <button id="backbutton">Back</button>
-      <button id="edittemplates">Edit Templates</button>
-      <button>Submit</button>
+      <button id="backbutton">Cancel</button>
+      <!--<button id="edittemplates">Edit Device Types</button>-->
+      <button style="float:right;">Create</button>
     </form>
   </div>
   <script src="/public/newdevice.js"></script>

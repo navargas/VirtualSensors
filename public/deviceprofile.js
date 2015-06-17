@@ -19,11 +19,46 @@ $(function() {
   var VariableMaxInput = $('#varmax');
   var ScriptBox = $('#scriptbox');
   var cache = {};
-
+  var varDoubleClickTime = {"value":undefined, "time":0};
   var editor = ace.edit('livesyntax');
-  editor.renderer.setShowGutter(false)
+  editor.$blockScrolling = Infinity;
+  //editor.renderer.setShowGutter(false)
   editor.getSession().setMode("ace/mode/json");
+  function editorClick(e) {
+    var editor = e.editor;
+    var pos = editor.getCursorPosition();
+    var token = editor.session.getTokenAt(pos.row, pos.column);
+    if (token.value == varDoubleClickTime.value) {
+      if (Date.now() - varDoubleClickTime.time < 200) {
+        varDoubleClickTime.value = undefined;
+        console.log('Dob trigger');
+      } else {
+        varDoubleClickTime.value = token.value;
+        varDoubleClickTime.time = Date.now();
+        console.log('too slow');
+        return;
+      }
+    } else {
+      varDoubleClickTime.value = token.value;
+      varDoubleClickTime.time = Date.now();
+      console.log('Dob set');
+      return;
+    }
+    console.log('Click: ', token);
+    //$("vars").tab("show");
+    if (token.type == "constant.numeric") {
+      loadVariables(SelectTemplate.val(), token.value.slice(2,-2));
+      $('#vartab').tab('show');
+    }
+  }
+  editor.on('click', editorClick);
 
+  var variableTypes = {
+    "static": CustomPane,
+    "random": RandomPane,
+    "custompane": CustomPane
+  };
+  
   function getCookieValue(a, b) {
     b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
     return b ? b.pop() : '';
@@ -93,7 +128,16 @@ $(function() {
   }
   function loadVariables(name, show) {
     if (!name) name = SelectTemplate.val();
+    console.log('Cache=', cache, 'name', name);
     var templateObj = cache[name];
+    if (!templateObj.variables) {
+      templateObj.variables = {};
+    }
+    if (show && !templateObj.variables[show]) {
+      console.log('Creating new variable', show);
+      var defaultvar = {"type":"static"};
+      cache[name].variables[show] = defaultvar;
+    }
     SelectVariable.html('');
     for (variable in templateObj.variables) {
       if (!templateObj.variables.hasOwnProperty(variable)) continue;
@@ -207,6 +251,7 @@ $(function() {
     console.log('radio', value);
     var template = SelectTemplate.val();
     var variable = SelectVariable.val();
+    if (!cache[template]) return;
     var vObj = cache[template].variables[variable];
     if (value == 'script') {
       RandomPane.css('display', 'none');
