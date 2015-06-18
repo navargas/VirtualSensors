@@ -73,6 +73,7 @@
 .optioncontent .inputbox input[type="radio"] {
   margin-left: 14px;
   margin-right: 4px;
+  margin-top: 30px;
 }
 
 .optioncontent button[disabled=disabled], .optioncontent button:disabled {

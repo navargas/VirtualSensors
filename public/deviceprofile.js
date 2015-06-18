@@ -6,14 +6,16 @@ $(function() {
   var NewTemplateButton = $('#newtemplate');
   var NewVariableButton = $('#newvariable');
   var DeleteVariableButton = $('#removevariable');
-  var SaveTemplateButton = $('#savetemplate, #savetemplatevar');
+  var SaveTemplateButton = $('#savetemplate');
+  var SaveVariableButton = $('#savetemplatevar');
   var VariableTab = $('#vartab');
   var VarTypeRadio = $('input[type=radio][name=vartype]');
   var RadioForm = $('#vartypeform');
   var ScriptPane = $('#scriptpane');
   var CustomPane = $('#custompane');
   var RandomPane = $('#rnumpane');
-  var BackButton = $('.backbutton');
+  var BackButton = $('#syntaxback');
+  var VarBackButton = $('#varback');
   var DisplayUIButton = $('.useui');
   var VariableMinInput = $('#varmin');
   var VariableMaxInput = $('#varmax');
@@ -206,6 +208,13 @@ $(function() {
   SaveTemplateButton.click(function() {
     saveVarState();
     sendTemplate(SelectTemplate.val());
+    window.location.href = '/newdevice';
+    return false;
+  });
+  SaveVariableButton.click(function() {
+    saveVarState();
+    //sendTemplate(SelectTemplate.val());
+    $('#templatetab').tab('show');
     return false;
   });
   NewTemplateButton.click(function() {
@@ -281,6 +290,11 @@ $(function() {
       vObj.min = parseInt(VariableMinInput.val());
     }
   }
+  VarBackButton.click(function() {
+    saveVarState();
+    $('#templatetab').tab('show');
+    return false;
+  });
   BackButton.click(function() {
     if (!checkOverwrite()) return false;
     var onTemplate = SelectTemplate.val();
