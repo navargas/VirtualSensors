@@ -28,6 +28,7 @@ if (conf.expect("url", "username", "password")) {
 } else {
   console.log('Database username/password/url parameters missing.');
   console.log('Data will be stored in local memory');
+  sessions.init(null);
 }
 
 // defensiveness against errors parsing request bodies...
