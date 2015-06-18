@@ -37,6 +37,10 @@ $(function() {
   });
   NewTemplate.click(function() {
     var name = prompt('Please enter new device type name');
+    console.log(name);
+    if (name === null) {
+      return false;
+    }
     if (!name) {
       alert('Invalid Device Type Name');
       return false;
