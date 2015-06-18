@@ -5,13 +5,29 @@ var cookieParser = require('cookie-parser');
 var handlebarsExpress = require('express-handlebars');
 var partials = require('express-partials');
 var iot = require('./lib/iot.js');
-var env = require('./lib/loadConfig.js').read('config.json');
+var conf = require('./lib/loadConfig.js');
+var env = conf.read('config.json');
+var storage = require('./lib/cloudant.js');
 var V1 = './routes/v1/';
 
 if (env.noiot == 'true') {
   console.log('IoT Disabled from conf file');
 } else {
   iot.init();
+}
+
+if (conf.expect("url", "username", "password")) {
+  storage.init(env.url, env.username, env.password, function() {
+    sessions.init(storage);
+  });
+  // Set interval to be 23 hours
+  var interval = 23*60*60*1000;
+  setInterval(function(){
+    storage.init(env.url, env.username, env.password);
+  },interval);
+} else {
+  console.log('Database username/password/url parameters missing.');
+  console.log('Data will be stored in local memory');
 }
 
 // defensiveness against errors parsing request bodies...
