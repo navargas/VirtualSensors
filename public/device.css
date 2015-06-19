@@ -107,6 +107,13 @@
   right: 30px;
 }
 
+#scriptsyntax {
+  height: 230px;
+  border: 1px solid #555;
+  margin: 20px;
+  margin-top: 5px;
+}
+
 #livesyntax {
   height: 230px;
   border: 1px solid #555;

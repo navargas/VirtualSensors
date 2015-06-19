@@ -57,10 +57,11 @@
             <input type="radio" name="vartype" value="random">random number</input>
             <input type="radio" name="vartype" value="static" checked="checked">prompt</input>
           </form>
+          <!-- Custom Script -->
           <div id="scriptpane" style="display:none">
-            <textarea id="scriptbox" style="height:185px;font-size:12px" wrap=off disabled="disabled">
-            </textarea>
+            <div id="scriptsyntax"></div>
           </div>
+          <!-- Random Variable -->
           <div class="panebox" id="rnumpane" style="display:block;width:50%;margin: 0 auto;">
             <div class="inputitem">
               <span>Min: </span>
@@ -72,6 +73,7 @@
             </div>
             <button class="useui">Display on UI</button>
           </div>
+          <!-- Value Prompt -->
           <div class="panebox" id="custompane">
             <p>
               This value will be selected when each individual device is created.
@@ -79,7 +81,6 @@
             <button class="useui">Display on UI</button>
           </div>
           <button href='/newdevice' id="varback" class="subbutton">back</button>
-          <!--<button id="savetemplatevar" class="subbutton">ok</button>-->
         </div>
         <div role="tabpanel" class="tab-pane" id="devid">
           <h3>Device ID</h3>

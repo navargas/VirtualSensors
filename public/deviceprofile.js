@@ -23,8 +23,9 @@ $(function() {
   var cache = {};
   var varDoubleClickTime = {"value":undefined, "time":0};
   var editor = ace.edit('livesyntax');
+  var customjs = ace.edit('scriptsyntax');
+
   editor.$blockScrolling = Infinity;
-  //editor.renderer.setShowGutter(false)
   editor.getSession().setMode("ace/mode/json");
   function editorClick(e) {
     var editor = e.editor;
@@ -54,6 +55,8 @@ $(function() {
     }
   }
   editor.on('click', editorClick);
+
+  customjs.getSession().setMode("ace/mode/javascript");
 
   var variableTypes = {
     "script": ScriptPane,
@@ -267,7 +270,6 @@ $(function() {
     }
   }
   function setVarRadio(value) {
-    console.log('radio', value);
     var template = SelectTemplate.val();
     var variable = SelectVariable.val();
     if (!cache[template]) return;
