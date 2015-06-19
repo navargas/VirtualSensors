@@ -19,7 +19,6 @@ $(function() {
   var DisplayUIButton = $('.useui');
   var VariableMinInput = $('#varmin');
   var VariableMaxInput = $('#varmax');
-  var ScriptBox = $('#scriptbox');
   var cache = {};
   var varDoubleClickTime = {"value":undefined, "time":0};
   var editor = ace.edit('livesyntax');
@@ -56,7 +55,6 @@ $(function() {
       return;
     }
     console.log('Click: ', token);
-    //$("vars").tab("show");
     if (token.type == "constant.numeric") {
       loadVariables(SelectTemplate.val(), token.value.slice(2,-2));
       $('#vartab').tab('show');
@@ -173,14 +171,6 @@ $(function() {
       CustomPane.css('display', 'none');
       ScriptPane.css('display', 'none');
     }
-    var boilerplate =  'var datetime = currentdate.getFullYear() + "-"\n' +
-                       '  + (1e15+(currentdate.getMonth()+1)+"").slice(-2) + "-"\n' +
-                       '  + (1e15+currentdate.getDate()+"").slice(-2) + " "\n' +
-                       '  + (1e15+currentdate.getHours()+"").slice(-2) + ":"\n' +
-                       '  + (1e15+currentdate.getMinutes()+"").slice(-2) + ":"\n' +
-                       '  + (1e15+currentdate.getSeconds()+"").slice(-2);\n' +
-                       'return datetime;';
-    ScriptBox.val(boilerplate);
   }
   function sendTemplate(name, syntax, variables) {
     profileobj = {};
@@ -224,7 +214,6 @@ $(function() {
   });
   SaveVariableButton.click(function() {
     saveVarState();
-    //sendTemplate(SelectTemplate.val());
     $('#templatetab').tab('show');
     return false;
   });
