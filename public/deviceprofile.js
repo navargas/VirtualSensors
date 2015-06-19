@@ -25,6 +25,14 @@ $(function() {
   var editor = ace.edit('livesyntax');
   var customjs = ace.edit('scriptsyntax');
 
+  BOILERPLATE_SCRIPT =
+    '// history - list of last n values generated\n' +
+    '// properties - map of user input properties\n' +
+    'function value(history, properties) {\n' +
+    '    // increment last value produced\n' +
+    '    return (history.pop() || 0) + 1;\n' +
+    '}';
+
   editor.$blockScrolling = Infinity;
   editor.getSession().setMode("ace/mode/json");
   function editorClick(e) {
@@ -278,6 +286,8 @@ $(function() {
     if (value == 'random') {
       VariableMinInput.val(vObj.min || 0);
       VariableMaxInput.val(vObj.max || 10);
+    } else if (value == 'script') {
+      customjs.getSession().setValue(vObj.script || BOILERPLATE_SCRIPT);
     }
   }
   function saveVarState() {
@@ -290,6 +300,8 @@ $(function() {
     if (vartype == 'random') {
       vObj.max = parseInt(VariableMaxInput.val());
       vObj.min = parseInt(VariableMinInput.val());
+    } else if (vartype == 'script') {
+      vObj.script = customjs.getSession().getValue();
     }
   }
   VarBackButton.click(function() {
