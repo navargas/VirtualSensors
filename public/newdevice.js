@@ -26,7 +26,8 @@ $(function() {
   });
   DeleteTemplate.click(function() {
     var cmd = {"cmd":"delete", "profilename":SelectTemplate.val()};
-    confirm('Are you sure you wish to delete ' + SelectTemplate.val() + '?');
+    var yn = confirm('Are you sure you wish to delete ' + SelectTemplate.val() + '?');
+    if (!yn) return false;
     $.post('/api/v1/sensors/profiles', cmd,
       function(data, httpstat) {
         document.cookie = 'template=;';
