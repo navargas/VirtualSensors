@@ -56,9 +56,9 @@ $(function() {
   editor.on('click', editorClick);
 
   var variableTypes = {
-    "static": CustomPane,
+    "script": ScriptPane,
     "random": RandomPane,
-    "custompane": CustomPane
+    "static": CustomPane
   };
   
   function getCookieValue(a, b) {
@@ -256,26 +256,26 @@ $(function() {
   VarTypeRadio.change(function() {
     setVarRadio(this.value);
   });
+  function setVarDisplay(value) {
+    for (varkey in variableTypes) {
+      if (!variableTypes.hasOwnProperty(varkey)) continue;
+      if (varkey == value) {
+        variableTypes[varkey].css('display', 'block');
+      } else {
+        variableTypes[varkey].css('display', 'none');
+      }
+    }
+  }
   function setVarRadio(value) {
     console.log('radio', value);
     var template = SelectTemplate.val();
     var variable = SelectVariable.val();
     if (!cache[template]) return;
     var vObj = cache[template].variables[variable];
-    if (value == 'script') {
-      RandomPane.css('display', 'none');
-      CustomPane.css('display', 'none');
-      ScriptPane.css('display', 'block');
-    } else if (value == 'random') {
-      RandomPane.css('display', 'block');
-      CustomPane.css('display', 'none');
-      ScriptPane.css('display', 'none');
+    setVarDisplay(value);
+    if (value == 'random') {
       VariableMinInput.val(vObj.min || 0);
       VariableMaxInput.val(vObj.max || 10);
-    } else {
-      RandomPane.css('display', 'none');
-      CustomPane.css('display', 'block');
-      ScriptPane.css('display', 'none');
     }
   }
   function saveVarState() {
