@@ -63,6 +63,7 @@ $(function() {
   editor.on('click', editorClick);
 
   customjs.getSession().setMode("ace/mode/javascript");
+  customjs.$blockScrolling = Infinity;
 
   var variableTypes = {
     "script": ScriptPane,
