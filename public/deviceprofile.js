@@ -210,7 +210,7 @@ $(function() {
   SaveTemplateButton.click(function() {
     saveVarState();
     sendTemplate(SelectTemplate.val());
-    window.location.href = '/newdevice';
+    window.location.href = '/newdevice?updatedvar=true';
     return false;
   });
   SaveVariableButton.click(function() {
@@ -255,6 +255,7 @@ $(function() {
     return false;
   });
   VarTypeRadio.change(function() {
+    saveVarState();
     setVarRadio(this.value);
   });
   function setVarDisplay(value) {
