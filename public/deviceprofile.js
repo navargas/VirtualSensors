@@ -39,22 +39,17 @@ $(function() {
     var pos = editor.getCursorPosition();
     var token = editor.session.getTokenAt(pos.row, pos.column);
     if (token.value == varDoubleClickTime.value) {
-      if (Date.now() - varDoubleClickTime.time < 200) {
+      if (Date.now() - varDoubleClickTime.time < 600) {
         varDoubleClickTime.value = undefined;
-        console.log('Dob trigger');
       } else {
         varDoubleClickTime.value = token.value;
-        varDoubleClickTime.time = Date.now();
-        console.log('too slow');
         return;
       }
     } else {
       varDoubleClickTime.value = token.value;
       varDoubleClickTime.time = Date.now();
-      console.log('Dob set');
       return;
     }
-    console.log('Click: ', token);
     if (token.type == "constant.numeric") {
       loadVariables(SelectTemplate.val(), token.value.slice(2,-2));
       $('#vartab').tab('show');
