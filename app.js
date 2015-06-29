@@ -17,14 +17,9 @@ if (env.noiot == 'true') {
 }
 
 if (conf.expect("url", "username", "password")) {
-  storage.init(env.url, env.username, env.password, function() {
+  storage.init(env.url, env.username, env.password, env.dbpostfix, function() {
     sessions.init(storage);
   });
-  // Set interval to be 23 hours
-  var interval = 23*60*60*1000;
-  setInterval(function(){
-    storage.init(env.url, env.username, env.password);
-  },interval);
 } else {
   console.log('Database username/password/url parameters missing.');
   console.log('Data will be stored in local memory');
