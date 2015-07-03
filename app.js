@@ -13,7 +13,7 @@ var V1 = './routes/v1/';
 if (env.noiot == 'true') {
   console.log('IoT Disabled from conf file');
 } else {
-  iot.init();
+  iot.init(sessions);
 }
 
 if (conf.expect("url", "username", "password")) {
