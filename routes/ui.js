@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
     res.render('index', data);
   } else if (useOauth) {
     var url = oauth2Client.generateAuthUrl({"scope":"email", "response_type":"code"});
-    res.render('login', {"layout":"blank","oauthurl":url});
+    res.render('login', {"layout":"blank","hidelogout":true,"oauthurl":url});
   } else {
     if (!sessions.user(DEBUG_USER)) {
       sessions.createUser(DEBUG_USER, null, null);
