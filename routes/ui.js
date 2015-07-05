@@ -10,9 +10,9 @@ var DEBUG_USER = 'DEV-USER-001'
 var TOKEN_AGE = 900000000;
 
 var NOTICES = [
-  //{"name":"1",
-  // "message": "This product is currently in alpha. Devices and templates are subject to change. " +
-  //           "Database replication temporarily disabled so devices may disappear intermittently."}
+  {"name":"helplink",
+   "title":"Hello!",
+   "message": "Welcome to Team IT's VirtualSensors. Click the \"Help\" link at the top of each page to get more info."}
 ];
 
 if (env.CLIENT_ID && env.CLIENT_SECRET && env.REDIRECT_URL) {
