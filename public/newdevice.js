@@ -16,7 +16,7 @@ $(function() {
     return false;
   });
   EditTemplates.click(function() {
-    window.location.href = '/public/customdevice.html';
+    window.location.href = '/customdevice';
     return false;
   });
   DeleteTemplate.click(function() {

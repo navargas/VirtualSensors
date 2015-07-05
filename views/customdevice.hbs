@@ -1,3 +1,73 @@
-<div class="optionbox">
-  <p>TEst</p>
+<div class="flex-container">
+  <!-- Nav tabs -->
+  <div class="optionbox" role="tabpanel">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#syntax" aria-controls="syntax" id="templatetab" style="display:none;"
+              role="tab" data-toggle="tab">Template Manager</a></li>
+      <li role="presentation" class="">
+        <a href="#vars" aria-controls="vars" style="display:none" id="vartab"
+              role="tab" data-toggle="tab"></a></li>
+    </ul>
+    <div class="optioncontent">
+      <div class="tab-content">
+        <!-- Syntax Tab -->
+        <div role="tabpanel" class="tab-pane active" id="syntax">
+          <div style="" class="tabtitle">
+            <h3>Device JSON Syntax</h3><select style="display:none;" id=selectdevice><select>
+          </div>
+          <div class="tabsubtitle">Double click variable to edit properties</div>
+          <div id="livesyntax"></div>
+          <button href='/newdevice' id="syntaxback" class="backbutton" style="float:left;">discard changes</button>
+          <button id="savetemplate" class="subbutton">save</button>
+        </div>
+        <!-- Variables Tab -->
+        <div role="tabpanel" class="tab-pane" id="vars">
+          <form style="display:none;margin-bottom:4px;">
+            <select id="selectvar" style="margin-left:15px;">
+              <option>Loading...</option>
+            </select>
+            <button id="removevariable">delete</button>
+            <button id="newvariable">new variable</button>
+          </form>
+          <form class="inputbox" id="vartypeform">
+            <input type="radio" name="vartype" value="script">javascript</input>
+            <input type="radio" name="vartype" value="random">random number</input>
+            <input type="radio" name="vartype" value="static" checked="checked">prompt</input>
+          </form>
+          <!-- Custom Script -->
+          <div id="scriptpane" style="display:none">
+            <button style="margin-left:20px;" class="useui">Display on UI</button>
+            <div id="scriptsyntax"></div>
+          </div>
+          <!-- Random Variable -->
+          <div class="panebox" id="rnumpane" style="display:block;width:50%;margin: 0 auto;">
+            <div class="inputitem">
+              <span>Min: </span>
+              <input name=min type=text class=holo id=varmin />
+            </div>
+            <div class="inputitem">
+              <span>Max: </span>
+              <input name=max type=text class=holo id=varmax />
+            </div>
+            <button class="useui">Display on UI</button>
+          </div>
+          <!-- Value Prompt -->
+          <div class="panebox" id="custompane">
+            <p>
+              This value will be selected when each individual device is created.
+            </p>
+            <button class="useui">Display on UI</button>
+          </div>
+          <button href='/newdevice' id="varback" class="subbutton">back</button>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="devid">
+          <h3>Device ID</h3>
+        </div>
+      </div>
+      <script src="/public/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+      <script src="/public/ace/src-noconflict/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+      <script src="/public/deviceprofile.js"></script>
+    </div>
+  </div>
 </div>

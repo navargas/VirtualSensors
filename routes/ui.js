@@ -51,6 +51,10 @@ router.get('/', function(req, res) {
   }
 });
 
+router.get('/customdevice', sessions.verify, function(req, res) {
+  res.render('customdevice', {"layout":"blank"});
+});
+
 router.get('/newdevice', sessions.verify, function(req, res) {
   var templates = sessions.getProfiles(req);
   var currentTemplate = req.cookies.template;
