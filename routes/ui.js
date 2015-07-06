@@ -12,7 +12,7 @@ var TOKEN_AGE = 900000000;
 var NOTICES = [
   {"name":"helplink",
    "title":"Hello!",
-   "message": "Welcome to Team IT's VirtualSensors. Click the \"Help\" link at the top of each page to get more info."}
+   "message": "Welcome to Team IT's VirtualSensors. Click the \"More Info\" link at the top of each page to get more info."}
 ];
 
 if (env.CLIENT_ID && env.CLIENT_SECRET && env.REDIRECT_URL) {
