@@ -29,6 +29,7 @@ router.get('/', function(req, res) {
     devices = nav.demap(devices).values;
     console.log('GET: devices', devices);
     var data = {"cards":devices};
+    data.helptitle = 'Welcome!';
     data.layout = 'blank';
     data.username = user.username;
     if (user.google && user.google.displayName) {

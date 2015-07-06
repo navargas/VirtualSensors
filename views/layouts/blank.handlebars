@@ -19,10 +19,43 @@
       {{#unless hidelogout}}
       <a class="navbar-brand rightinfo" href="/api/v1/auth/logout?redirect=true">Log out</a>
       {{/unless}}
-      <a class="navbar-brand rightinfo" href="">Help</a>
+      <a class="navbar-brand rightinfo" href="javascript:void(0)"
+         onclick="showhelpmodal()">Help</a>
     </nav>
+    <!-- MODAL -->
+    <div class="modal fade" id="helpmodal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">More Info</h4>
+          </div>
+          <div class="modal-body" id='helpmodalbody'>
+            Loading...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /MODAL -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     {{{body}}}
     <script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      function showhelpmodal() {
+        $('#helpmodal').modal('show');
+        return false;
+      }
+      $(function() {
+        var filename = window.location.pathname.replace('/', '');
+        if (filename === '') filename = 'default';
+        filename += '.html';
+        $.get('/public/help/'+filename, function(data, status) {
+          $('#helpmodalbody').html(data);
+        });
+      });
+    </script>
   </body>
 </html>
