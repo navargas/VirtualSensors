@@ -2,7 +2,9 @@
 <div class="outlinebox">
   <div class="outlinecontrols">
     <a class="deletebutton" href='/api/v1/sensors/delete?device={{name}}'>&#10005</a>
-    <h1 class="cardtitle">{{static.templateprofile}}</h1>
+    <h1 class="cardtitle">{{static.templateprofile}}
+      <!--<sup><span class="glyphicon glyphicon-cog cogbutton" aria-hidden="true"></span></sup>-->
+    </h1>
     <p>{{name}}</p>
     <a href="javascript:var t=prompt('','{{../topic}}');">Get DeviceID</a>
     <div class="numberval">{{displayvalue}}</div>
