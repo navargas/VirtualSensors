@@ -48,6 +48,9 @@
         $('#helpmodal').modal('show');
         return false;
       }
+      function cogclick(info) {
+        console.log('cogclick', info);
+      }
       $(function() {
         var filename = window.location.pathname.replace('/', '');
         if (filename === '') filename = 'default';
