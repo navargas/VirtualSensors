@@ -59,12 +59,11 @@ body {
 
 .settingsbutton {
   float: right;
-  margin-right: 5px;
-  margin-top: -17px;
+  margin-right: 8px;
+  margin-top: -16px;
   font-size: 15px;
   color: #26343F;
   top: 5px;
-  font-size: 13px;
 }
 
 .deletebutton {

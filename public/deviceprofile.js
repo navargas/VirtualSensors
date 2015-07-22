@@ -205,7 +205,8 @@ $(function() {
   SaveTemplateButton.click(function() {
     saveVarState();
     sendTemplate(SelectTemplate.val());
-    window.location.href = '/newdevice?updatedvar=true';
+    //window.location.href = '/newdevice?updatedvar=true';
+    window.history.back();
     return false;
   });
   SaveVariableButton.click(function() {
@@ -299,7 +300,8 @@ $(function() {
     if (!checkOverwrite()) return false;
     var onTemplate = SelectTemplate.val();
     if (onTemplate) document.cookie = 'template=' + onTemplate + ';path=/';
-    window.location.href = '/newdevice';
+    //window.location.href = '/newdevice';
+    window.history.back();
     return false;
   });
   /* Select Box */

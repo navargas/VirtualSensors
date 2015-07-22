@@ -2,7 +2,7 @@
 <div class="outlinebox">
   <div class="outlinecontrols">
     <a class="deletebutton" href='/api/v1/sensors/delete?device={{name}}'>&#10005</a>
-    <span onclick="cogclick()" class="glyphicon glyphicon-cog settingsbutton" aria-hidden="true"></span>
+    <span onclick="cogclick(this)" data-template="{{static.templateprofile}}" class="glyphicon glyphicon-cog settingsbutton" aria-hidden="true"></span>
     <h1 class="cardtitle">{{static.templateprofile}}
     </h1>
     <p>{{name}}</p>
@@ -33,3 +33,10 @@
   <div class="outlinefooter">
   </div>
 </div>
+<script>
+  function cogclick(data) {
+    var template = data.getAttribute('data-template');
+    document.cookie = 'template=' + template + ';path=/';
+    window.location = '/customdevice';
+  }
+</script>
