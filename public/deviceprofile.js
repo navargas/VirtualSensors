@@ -9,8 +9,7 @@ $(function() {
   var SaveTemplateButton = $('#savetemplate');
   var SaveVariableButton = $('#savetemplatevar');
   var VariableTab = $('#vartab');
-  var VarTypeRadio = $('input[type=radio][name=vartype]');
-  var RadioForm = $('#vartypeform');
+  var SelectVarType = $('#selecttype');
   var ScriptPane = $('#scriptpane');
   var CustomPane = $('#custompane');
   var RandomPane = $('#rnumpane');
@@ -157,12 +156,9 @@ $(function() {
     if (show) {
       SelectVariable.val(show);
       var varType = templateObj.variables[show].type;
-      console.log('Setting radio to', varType);
-      VarTypeRadio.val([varType])
+      SelectVarType.val(varType);
       setVarRadio(varType);
-      RadioForm.css('display','inline');
     } else {
-      RadioForm.css('display','none');
       RandomPane.css('display', 'none');
       CustomPane.css('display', 'none');
       ScriptPane.css('display', 'none');
@@ -250,7 +246,7 @@ $(function() {
     loadVariables();
     return false;
   });
-  VarTypeRadio.change(function() {
+  SelectVarType.change(function() {
     saveVarState();
     setVarRadio(this.value);
   });
@@ -281,7 +277,7 @@ $(function() {
     var template = SelectTemplate.val();
     var variable = SelectVariable.val();
     if (!variable) return;
-    var vartype = VarTypeRadio.filter(':checked').val();
+    var vartype = SelectVarType.val();
     var vObj = cache[template].variables[variable];
     vObj.type = vartype;
     if (vartype == 'random') {

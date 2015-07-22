@@ -30,11 +30,12 @@
             <button id="removevariable">delete</button>
             <button id="newvariable">new variable</button>
           </form>
-          <form class="inputbox" id="vartypeform">
-            <input type="radio" name="vartype" value="script">javascript</input>
-            <input type="radio" name="vartype" value="random">random number</input>
-            <input type="radio" name="vartype" value="static" checked="checked">prompt</input>
-          </form>
+          <div>&nbsp;</div>
+          <span class="inputbox">Variable Type:</span><select id="selecttype">
+            <option value="script">javascript</option>
+            <option value="random">random number</option>
+            <option value="static">prompt</option>
+          </select>
           <!-- Custom Script -->
           <div id="scriptpane" style="display:none">
             <button style="margin-left:20px;" class="useui">Display on UI</button>
